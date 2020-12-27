@@ -16,7 +16,7 @@ jobs:
            echo ${GITHUB_REF}
            echo ${GITHUB_REF:19}
            echo ${GITHUB_REF: -4}
-           if [ "${GITHUB_REF: -4}" == "beta"] 
+           if [ ${GITHUB_REF: -4} == 'beta' ] 
            then
              echo ::set-output name=DOCKER_TAG::${GITHUB_REF:19}
            else
