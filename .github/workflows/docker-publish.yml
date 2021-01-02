@@ -11,6 +11,8 @@ jobs:
       -
          name: Set up variables
          id: vars
+         env:
+           DOCKER_REPO: dstoft/test-buildx
          shell: bash
          run: |
            echo ${GITHUB_REF}
@@ -18,9 +20,9 @@ jobs:
            echo ${GITHUB_REF: -4}
            if [ ${GITHUB_REF: -4} == 'beta' ] 
            then
-             echo ::set-output name=DOCKER_TAG::dstoft/test-buildx:${GITHUB_REF:19}
+             echo ::set-output name=DOCKER_TAG::${DOCKER_REPO}:${GITHUB_REF:19}
            else
-             echo ::set-output name=DOCKER_TAG::dstoft/test-buildx:${GITHUB_REF:19},dstoft/test-buildx:latest
+             echo ::set-output name=DOCKER_TAG::${DOCKER_REPO}:${GITHUB_REF:19},${DOCKER_REPO}:latest
            fi
       -
         name: Set up QEMU
